@@ -726,7 +726,7 @@ $no_tags_text = strip_tags($br_text);
 
 echo $no_tags_text;*/
 
-// 33. New PHP 8 string functions
+// 33. New string functions (PHP 8)
 /*$text = 'PHP is a powerful language';
 $word = 'PHP';
 // Contains
@@ -736,7 +736,246 @@ var_dump(str_starts_with($text, $word));
 // Ends with
 var_dump(str_ends_with($text, $word));*/
 
-// 34. 
+// 34. Classes
+/*class Person {
+    // Attributes
+    private string $name;
+    private int $yearBorn;
+
+    // Constructor
+    public function __construct(string $name, int $yearBorn)
+    {
+        $this->name = $name;
+        $this->yearBorn = $yearBorn;
+    }
+
+    // Methods
+    public function getName() {
+        return $this->name;
+    }
+    public function calculateAge() {
+        return (int) date('Y') - $this->yearBorn;
+    }
+}
+
+// 35. Objects
+$person1 = new Person('Miguel', 1999);
+$name = $person1->getName();
+$age = $person1->calculateAge();
+echo "$name is $age years old";*/
+
+// 36. Inheritance
+/*class Vehicle {
+    public int $passengers;
+
+    protected function move() {
+        echo "the vehicle is moving";
+    }
+}
+class Car extends Vehicle {
+    public int $seats;
+
+    public function turnOn() {
+        echo "the car is on";
+    }
+    public function turnOff() {
+        echo "the car is off";
+    }
+    public function start() {
+        $this->move();
+    }
+}
+$mustang = new Car();
+$mustang->start();
+$mustang_passengers = $mustang->passengers = 4;
+echo "<br>The car has $mustang_passengers passengers";*/
+
+// 37. Namespace
+// Allows to declare/import two or more classes with the same name in the same file
+// Go to the files book.php and movie.php to check the code
+/*require_once 'namespace/book.php';
+require_once 'namespace/movie.php';
+// Both book.php and movie.php have a class "MyClass", but they´re in different namespaces
+$book = new Book\MyClass();
+$movie = new Movie\MyClass();
+$book->rent();
+$movie->rent();*/
+
+// 38. Static
+// Allows to use a class without creating an object
+/*class Person {
+    // As no objects will be created, the attributes can be private
+    private static string $name = 'Miguel';
+    // Declate the function as static
+    public static function sayHello() {
+        // Use self::$name instead of this->name
+        echo 'Hello, my name is ' . self::$name;
+    }
+}
+Person::sayHello();*/
+
+// 39. Method chaining
+// Call a method after another - $person->setName()->setAge()->introduce()
+/*class Person {
+    private string $name;
+    private int $age;
+    
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
+    }
+    public function setAge($age) {
+        $this->age = $age;
+        return $this;
+    }
+    public function introduce() {
+        echo "Hello!, my name is $this->name and I am $this->age years old";
+    }
+}
+$person = new Person();
+$person->setName('Miguel')->setAge(24)->introduce();*/
+
+// 40. Interfaces
+// Define a structure with some methods
+/*interface PersonInterface {
+    // Must be public and don´t implement anything, only be defined
+    public function sayHello();
+}
+interface Developer {
+    public function code();
+}
+// Add it to the classes to force them to implement this structure
+class Person implements PersonInterface, Developer {
+    private string $name;
+
+    public function __construct(string $name) {
+        $this->name = $name;
+    }
+    public function sayHello() {
+        echo "Hello, my name is Miguel<br>";
+    }
+    public function code() {
+        echo "I am writing code<br>";
+    }
+}
+$person = new Person('Miguel');
+$person->sayHello();
+$person->code();*/
+
+// 41. Constant
+// Variables that cannot change. By convention their name is uppercased
+/*class Person {
+    const NAME = 'Miguel';
+    // This would throw an error
+    //NAME = 'Jesus';
+}
+// Use Class::CONST_NAME to access it
+echo Person::NAME;*/
+
+// 42. Abstract class
+// Define a structure with some attributes and methods (they can be public or private)
+/*abstract class Person {
+    protected string $name;
+
+    // This method can be overwritten
+    public function setName(string $name) {
+        $this->name = $name;
+    }
+    // This method MUST be overwritten
+    abstract protected function sayHello();
+}
+// Using an abstract class
+class Student extends Person {
+    public function sayHello() {
+        echo "Hi, my name is $this->name";
+    }
+}
+$student = new Student();
+$student->setName('Miguel');
+$student->sayHello();*/
+
+// 43. Trait
+// It´s like a class, but cannot be instantiated
+/*trait Person {
+    public function speak() {
+        echo "Hello, I´m a person<br>";
+    }
+}
+trait Developer {
+    public function code() {
+        echo "Hello, I´m coding<br>";
+    }
+}
+// Inherit from several traits using the keyword "use"
+class Student {
+    use Person;
+    use Developer;
+}
+$student = new Student();
+$student->speak();
+$student->code();*/
+
+// 44. Null safe operator (PHP 8)
+/*class Home {
+    public $address = 'Hermosillo';
+}
+class Person {
+    public ?Home $home = null;
+}
+
+$person = new Person();
+// This line throws an error because $home is null
+//echo $person->home->address;
+// To avoid this, use ? to verify first if $person and $home are not null
+echo $person?->home?->address;*/
+
+// 45. Contructor property promotion (PHP 8)
+// Declare attributes as constructor parameters
+/*class Person {
+    // Declare the variable adding the access modifier. You can also add a default value
+    public function __construct(private string $name = 'default', private int $age = 20)
+    {
+        // Don´t need to use $this keyword to access the variables
+        if ($name == 'default') {
+            echo 'You haven´t changed the name<br>';
+        }
+        else {
+            echo 'You have changed the name<br>';
+        }
+    }
+    public function introduce() {
+        echo "Hi, my name is $this->name and I am $this->age years old<br>";
+    }
+}
+$defaultPerson = new Person();
+$defaultPerson->introduce();
+$defaultPerson = new Person('Miguel', 24);
+$defaultPerson->introduce();*/
+
+// 46. Regular expressions
+// Match
+// Search for matches, returns an array
+/*$string = 'hello world, hello udemy';
+$pattern = '/hello/';
+// preg_match returns the first occurrence of a string or null. preg_match_all returns all the occurrences or null
+if (preg_match($pattern, $string, $matches)) {
+    print_r($matches);
+}
+else {
+    echo 'No matches found';
+}*/
+
+// Replace
+// Search and replace in a string or array
+/*$string = 'hello world, hello udemy';
+$pattern = '/hello/';
+$replacement = 'hi';
+// Replaces all occurrences by default, but you can modify this adding the number of replacements at the end
+$newString = preg_replace($pattern, $replacement, $string, 1);
+echo $newString;*/
+
+// 47. Project 7.- Router
+// Go to the index.php file within the project_7 folder
 
 ?>
 
