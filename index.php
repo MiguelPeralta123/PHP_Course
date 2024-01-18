@@ -975,7 +975,9 @@ $newString = preg_replace($pattern, $replacement, $string, 1);
 echo $newString;*/
 
 // 47. Project 7.- Router
-// Go to the index.php file within the project_7 folder
+// Go to the index.php file in the folder "project_7"
+
+// 48.
 
 ?>
 
