@@ -1053,7 +1053,24 @@ var_dump($output);
 echo '<br>Result Code:<br>';
 var_dump($result_code);*/
 
-// 51. 
+// 51. Run Python files
+/*$name = 'miguel';
+// escapeshellcmd converts a string into a safe to run command
+$command = escapeshellcmd("python ./say_hello.py $name");
+exec($command, $output, $result_code);
+echo $output[0];*/
+
+// 52. Curl
+// Send requests to apis
+/*$curl = curl_init();
+curl_setopt_array($curl, [
+    CURLOPT_URL => 'https://jsonplaceholder.typicode.com/todos',
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_HEADER => []
+]);
+$response = curl_exec($curl);
+curl_close($curl);*/
 
 ?>
 
