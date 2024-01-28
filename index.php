@@ -977,7 +977,83 @@ echo $newString;*/
 // 47. Project 7.- Router
 // Go to the index.php file in the folder "project_7"
 
-// 48.
+// 48. Validating and sanitizing
+// Validate flags return true or false (FILTER_VALIDATE_URL, FILTER_VALIDATE_INT, etc.)
+/*$string = 'test@gmail.com';
+if (filter_var($string, FILTER_VALIDATE_EMAIL)) {
+    echo 'The format is valid';
+} else {
+    echo 'The format is not valid';
+}*/
+
+// Sanitize flags return a new variable (FILTER_SANITIZE_URL, FILTER_SANITIZE_NUMBER_INT, etc.)
+/*$string = 't/est  @g/mail.co m';
+$sanitized_string = filter_var($string, FILTER_SANITIZE_EMAIL);
+echo $sanitized_string;*/
+
+// 49. Database (using PDO)
+// Create a connection
+//$pdo = new PDO('mysql:host=localhost;dbname=php_course', 'root', '123');
+
+// Insert
+/*$affected_rows = $pdo->exec('INSERT INTO example (name) VALUES ("Cota")');
+$last_id = $pdo->lastInsertId();
+echo "$affected_rows row(s) affected with id $last_id";*/
+
+// Transactions (run a set of queries, if one of them fails, all changes are reverted)
+/*$pdo->beginTransaction();
+$affected_rows = $pdo->exec('INSERT INTO example (name) VALUES ("Roberto")');
+$affected_rows = $pdo->exec('INSERT INTO example (name) VALUES ("Jose")');
+$affected_rows = $pdo->exec('INSERT INTO example (name) VALUES ("Vanessa")');
+$pdo->commit();*/
+
+// Use "prepare" to make your queries safer and avoid SQL injection
+/*$name = 'Jesus';
+// Create a query and use "?" for variables
+$statement = $pdo->prepare('INSERT INTO example (name) VALUES (?)');
+// Bind values to the statement. "1, $name" means that the first "?" will be replaced with the value of $name
+$statement->bindValue(1, $name);
+// Execute will convert the values to strings, avoiding any SQL injection
+$rows_affected = $statement->execute();
+echo "$rows_affected row(s) affected";*/
+
+// Update
+/*$id = 1;
+$name = 'Jesus Miguel';
+$statement = $pdo->prepare('UPDATE example SET name=? WHERE id=?');
+$statement->bindValue(1, $name);
+$statement->bindValue(2, $id);
+$rows_affected = $statement->execute();
+echo "$rows_affected row(s) affected";*/
+
+// Delete
+/*$id = 7;
+$statement = $pdo->prepare('DELETE FROM example WHERE id=?');
+$statement->bindValue(1, $id);
+$rows_affected = $statement->execute();
+echo "$rows_affected row(s) affected";*/
+
+// Select
+/*$id = 3;
+// Fetch all records or use WHERE to filter
+$statement = $pdo->prepare('SELECT * FROM example');
+//$statement = $pdo->prepare('SELECT * FROM example WHERE id=?');
+//$statement->bindValue(1, $id);
+$statement->execute();
+// fetchAll returns an array of records. "PDO::FETCH_ASSOC" means that the array will be associative
+$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+foreach($rows as $row) {
+    echo $row["name"] . "<br>";
+}*/
+
+// 50. Run command lines
+/*exec('whoami', $output, $result_code);
+echo 'Output:<br>';
+var_dump($output);
+echo '<br>Result Code:<br>';
+var_dump($result_code);*/
+
+// 51. 
 
 ?>
 
