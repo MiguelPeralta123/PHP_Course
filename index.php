@@ -153,7 +153,7 @@ foreach ($numbers as $number) {
 }*/
 
 // 11. PHP loop and conditional inside HTML
-// Go to the end of this file, after the PHP closing tag
+// Go to the "exercise_11.php" file within the "exercises" folder
 
 // 12. Strtotime
 // Returns a timestamp, which is the number of seconds since January 1st, 1970. It´s quite flexible
@@ -464,11 +464,11 @@ echo '<br />null<br />empty: ';
 var_dump(empty($null));*/
 
 // 27. Forms
-// Go to the end of this file, after the PHP closing tag
+// Go to the "exercise_27.php" file within the "exercises" folder
 
 // 28. Project 6.- Contact form
 // Create a form and store the user name and the date in a json object
-// Go to the end of this file, after the PHP closing tag
+// Go to the "project_6.php" file within the "projects" folder
 
 // 29. Cookies
 // Create
@@ -975,7 +975,7 @@ $newString = preg_replace($pattern, $replacement, $string, 1);
 echo $newString;*/
 
 // 47. Project 7.- Router
-// Go to the index.php file in the folder "project_7"
+// Go to the "index.php" file within the "projects/project_7" folder
 
 // 48. Validating and sanitizing
 // Validate flags return true or false (FILTER_VALIDATE_URL, FILTER_VALIDATE_INT, etc.)
@@ -1064,95 +1064,50 @@ echo $output[0];*/
 // Send requests to apis
 /*$curl = curl_init();
 curl_setopt_array($curl, [
-    CURLOPT_URL => 'https://jsonplaceholder.typicode.com/todos',
-    CURLOPT_TIMEOUT => 30,
+    CURLOPT_URL => 'https://jsonplaceholder.typicode.com/todos/44',
     CURLOPT_CUSTOMREQUEST => 'GET',
-    CURLOPT_HEADER => []
+    CURLOPT_TIMEOUT => 30,
+    CURLOPT_HEADER => [],
+    // Disable SSL verification (not recommended, for testing purposes only)
+    CURLOPT_SSL_VERIFYPEER => false,
+    CURLOPT_SSL_VERIFYHOST => false,
 ]);
 $response = curl_exec($curl);
 curl_close($curl);*/
 
+// 53. Sending Emails
+// Run "composer require phpmailer/phpmailer" to install phpmailer
+/*require './vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+// Create an instance of PHPMailer and set it up
+$mailer = new PHPMailer();
+// If an error occurs, handle it
+$mailer->SMTPDebug = SMTP::DEBUG_SERVER;
+$mailer->isSMTP();
+$mailer->host = 'smtp.example.com';
+$mailer->SMTPAuth = true;
+$mailer->Username = 'test@example.com';
+$mailer->Password = 'password';
+$mailer->SMTPSecure = PHPMAILER::ENCRYPTION_SMTPS;
+$mailer->Port = 465;
+// Add sender and recipients
+$mailer->setFrom('test@example.com', 'Miguel');
+$mailer->addReplyTo('test@example.com', 'Miguel');
+$mailer->addAddress('another_test@example.com', 'Vanessa');
+$mailer->addAddress('another_test_2@example.com', 'Alex');
+$mailer->addCC('another_test_to_copy@example.com', 'Cota');
+$mailer->addBCC('another_test_to_copy_2@example.com', 'Ana');
+// Create te email body
+$mailer->Subject = 'This is an email test';
+$mailer->isHTML();
+// If the recipient accepts HTML, send this
+$mailer->Body = "<b>Email sent with PHPMailer</b><br>This email was sent using the PHPMailer package";
+// Otherwise, send plain text
+$mailer->AltBody = "Email sent with PHPMailer\nThis email was sent using the PHPMailer package";
+// Add files
+$mailer->addAttachment('path_to_the_file', 'file_name.png');
+// Send the email
+$mailer->send();*/
+
 ?>
-
-<!-- 11. PHP loop and conditional inside HTML -->
-<!--<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PHP inside HTML</title>
-    </head>
-    <body>
-        <?php //$names = ['Pratham', 'Simon', 'Amir', 'Vitto', 'Oliver'] ?>
-        <h1>Names</h1>
-        <ul>
-            <?php //foreach ($names as $name) : ?>
-                <?php //if ($name != 'Simon') : ?>
-                    <li>
-                        <?php //echo $name ?>
-                    </li>
-                <?php //endif ?>
-            <?php //endforeach ?>
-        </ul>
-    </body>
-</html>-->
-
-<!-- 27. Forms -->
-<!--<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Forms</title>
-    </head>
-    <body>
-        <h1>Print name</h1>
-        <form method="POST">
-            <input type="text" name="name" placeholder="type your name" />
-            <input type="submit" value="Send" />
-        </form>
-        <?php
-            /*if (!empty($_POST['name'])) {
-                $name = $_POST['name'];
-                echo '<h3>Hello ' . $name . '!</h3>';
-            }
-            else {
-                echo '<h3>Hello strange!</h3>';
-            }*/
-        ?>
-    </body>
-</html>-->
-
-<!-- 28. Project 6.- Contact form -->
-<!--<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Contact form</title>
-    </head>
-    <body>
-        <h1>Contact form</h1>
-        <form method="POST">
-            <input type="text" name="name" placeholder="name" />
-            <input type="text" name="email" placeholder="email" />
-            <input type="text" name="message" placeholder="message" />
-            <input type="submit" value="Submit" />
-        </form>
-        <?php
-            /*if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['message'])) {
-                $array = [
-                    "name" => $_POST['name'],
-                    "email" => $_POST['email'],
-                    "message" => $_POST['message'],
-                    "date" => date('d-m-y h:i:s')
-                ];
-                $json = json_encode($array);
-                echo $json;
-            }
-            else {
-                echo 'All fields are required';
-            }*/
-        ?>
-    </body>
-</html>-->
