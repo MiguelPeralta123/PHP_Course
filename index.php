@@ -1110,4 +1110,20 @@ $mailer->addAttachment('path_to_the_file', 'file_name.png');
 // Send the email
 $mailer->send();*/
 
+// 54. Testing
+// PHPUnit (composer require phpunit/phpunit)
+// Run "vendor\bin\phpunit directory_name" and PHPUnit will test each file which name includes "Test"
+// For example, run "vendor\bin\phpunit tests" to test the functions in exampleTest.php
+
+// Pest (composer require pestphp/pest)
+// Run "vendor\bin\pest --init" to initialize Pest
+// Run "vendor\bin\pest directory_name" and Pest will test each file in the directory
+// For example, run "vendor\bin\pest tests" to test the functions in exampleTest.php and examplePestTest.php
+// Pest output is much cleaner than PHPUnit, and its syntax is easier to understand (check tests/examplePestTest.php)
+
+// 55. Project 8.- Testing calculator
+// Create a calculator using the TDD aproach (test driven development)
+// First create the test and make sure it fails, then create the program and finally run the test until it works
+// Run "vendor\bin\phpunit tests" to test the "calculatorTest.php" file
+
 ?>
