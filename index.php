@@ -1126,4 +1126,96 @@ $mailer->send();*/
 // First create the test and make sure it fails, then create the program and finally run the test until it works
 // Run "vendor\bin\phpunit tests" to test the "calculatorTest.php" file
 
+// 56. Password hashing
+/*$user = 'test@example.com';
+$password = '123456';
+// password_hash requires the password and the hashing algorithm
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+// Each time a password is hashed, the result is different
+//echo $hashed_password;
+if (password_verify('123456', $hashed_password)) {
+    echo 'Login successfully!';
+}
+else {
+    echo 'Password incorrect';
+}*/
+
+// 57. Other PHP functions
+
+// Splat operator
+// Unpacking an array
+/*function sayHi(string $name='', int $age=0) {
+    echo "Hi, my name is $name and I am $age years old!";
+}
+$person = ['Miguel', 24];
+sayHi(...$person);
+// Packing an array
+function sayHiPeople(...$people) {
+    foreach ($people as $person) {
+        echo "Hi $person!" . PHP_EOL;
+    }
+}
+sayHiPeople('Miguel', 'Roberto', 'Jose', 'Vanessa')*/
+
+// Pointer of an argument
+// Adding "&" before the parameter name, the target will be the argument´s pointer, so any changes will also affect the argument´s original value
+/*function changeNumber(int &$number=0) {
+    $number += 10;
+    return $number;
+}
+$original_number = 2;
+$new_number = changeNumber($original_number);
+// The value of "original_number" is now 12
+echo "Original number: $original_number" . PHP_EOL;
+// The value of "new_number" is also 12
+echo "New number: $new_number";*/
+
+// Callback
+// A function that calls another one
+/*function changeNumber(int $number=0, $callback) {
+    $new_number = $callback($number);
+    return $new_number;
+}
+// Callback function
+function addNumber(int $number=0) {
+    return $number + 10;
+}
+// Sending a predefined function as callback
+//$new_number = changeNumber(5, 'addNumber');
+// Sending an anonymous function as callback
+$new_number = changeNumber(5, function(int $number=0) {
+    return $number**2;
+});
+echo $new_number;*/
+
+// 58. Named arguments (only works with PHP 8 or higher)
+// Call a function and assign arguments to specific parameters identifing them by name
+/*function introduce(string $name='Miguel', int $age=24, string $learning='PHP') {
+    echo "Hello, my name is $name, I am $age years old and I am learning $learning";
+}
+// For example, to modify the value of the third parameter use the key 'learning'
+introduce(learning:'Python');*/
+// Instead of passing the three arguments
+//introduce('Miguel', 24, 'Python');
+
+// 59. Union types (only works with PHP 8 or higher)
+// An argument can accept different data types, and the function can return different data types
+// For example, $name could be a string or an array, and the function itself can return a string or an array
+/*function introduce(string|array $name) : string|array {
+    if (is_array($name)) {
+        $result = [];
+        foreach ($name as $n) {
+            $result[] = "Hello, my name is $n";
+        }
+        return $result;
+    }
+    else {
+        return "Hello, my name is $name";
+    }
+}
+// This is completely valid. The return value is a string
+$introduction = introduce('Miguel');
+// This is also valid. The return value is an array
+$introduction = introduce(['Miguel', 'Alex']);*/
+
 ?>
