@@ -1218,4 +1218,8 @@ $introduction = introduce('Miguel');
 // This is also valid. The return value is an array
 $introduction = introduce(['Miguel', 'Alex']);*/
 
+// 60. Final Project.- Build a MVC
+// Go to the "index.php" file within the "projects/mvc/public" folder
+// Run
+
 ?>

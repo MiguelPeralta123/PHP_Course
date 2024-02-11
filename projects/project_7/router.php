@@ -7,9 +7,11 @@ class Router {
             echo 'Methods do not match';
             return false;
         }
-        // If the paths match, import the requested filename
-        $root = '/php_course/project_7';
-        if ($root . $path == $_SERVER['REQUEST_URI']) {
+        // With XAMMP, use "($root . $path == $_SERVER['REQUEST_URI'])"
+        //$root = '/php_course/project_7';
+        // Without XAMMP, use "($path == $_SERVER['REQUEST_URI'])"
+        if ($path == $_SERVER['REQUEST_URI']) {
+            // If the paths match, import the requested filename
             require_once $filename;
             exit();
         }
